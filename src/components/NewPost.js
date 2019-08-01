@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../styles/NewPost.css';
+import '../styles/Home.css';
 
 class NewPost extends Component {
     state = {
@@ -23,7 +23,8 @@ class NewPost extends Component {
         return (
             <div className='panel post-bounds'>
 				<textarea
-					placeholder='Ask a question'
+                    id = 'post-area'
+					placeholder='What ya curious about?'
 					onChange={(e) => this.updatePostInput(e.target.value)} />
           		<div className='post-button' onClick={this.createPost}>Post</div>
 				<div className='empty-post-alert'>Post cannot be empty</div>

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/Home.css';
 
 class Post extends Component {
 
@@ -8,9 +10,14 @@ class Post extends Component {
 
     render () {
         return (
-            <div className="panel post-bounds">
-                {this.props.content}
-            </div>
+            <Link className='link' to={{ 
+                pathname: `/post/${this.props.id}`,
+                content: this.props.content
+            }}>
+                <div className="panel post-bounds">
+                    {this.props.content.text} 
+                </div>
+            </Link>
         )
     }
 }
