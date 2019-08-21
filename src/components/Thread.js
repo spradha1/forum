@@ -25,9 +25,11 @@ class Thread extends Component {
         }
         else {
 			var alertBox = document.querySelector('.empty-comment-alert');
-			alertBox.classList.toggle('empty-area');
+            alertBox.classList.toggle('empty-area');
+            alertBox.innerHTML = "Comment cannot be empty";
 			setTimeout(() => {
-				alertBox.classList.toggle('empty-area');
+                alertBox.classList.toggle('empty-area');
+                alertBox.innerHTML = "";
 			}, 1000);
 		}
     }*/

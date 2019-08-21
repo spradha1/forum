@@ -8,7 +8,7 @@ class NewPost extends Component {
 
     // track changes in post input
 	updatePostInput = (content) => {
-		this.setState({postInput: content.trim()});
+        this.setState({postInput: content.trim()});
     }
     
     // new post
@@ -27,7 +27,7 @@ class NewPost extends Component {
 					placeholder='What ya curious about?'
 					onChange={(e) => this.updatePostInput(e.target.value)} />
           		<div className='post-button' onClick={this.createPost}>Post</div>
-				<div className='empty-post-alert'>Post cannot be empty</div>
+				<div className='empty-post-alert'></div>
         	</div>
         )
     }

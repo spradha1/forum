@@ -33,7 +33,7 @@ class NewComment extends Component {
 					placeholder='What do ya think about this?'
 					onChange={(e) => this.updateCommentInput(e.target.value)} />
           		<div className='post-button' onClick={this.createComment}>Post</div>
-				<div className='empty-comment-alert'>Comment cannot be empty</div>
+				<div className='empty-comment-alert'></div>
         	</div>
         )
     }
