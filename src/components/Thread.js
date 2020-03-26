@@ -15,24 +15,6 @@ class Thread extends Component {
         }*/
     }
 
-    // add comment to its own state and then invoke the home component's function
-    /*addCommentToThread (postId, commentInput) {
-        if (commentInput) {
-            const temp = Object.assign({}, this.state);
-            temp.content.comments.push(commentInput);
-            document.querySelector('#comment-area').value = '';
-            this.setState(temp);
-        }
-        else {
-			var alertBox = document.querySelector('.empty-comment-alert');
-            alertBox.classList.toggle('empty-area');
-            alertBox.innerHTML = "Comment cannot be empty";
-			setTimeout(() => {
-                alertBox.classList.toggle('empty-area');
-                alertBox.innerHTML = "";
-			}, 1000);
-		}
-    }*/
 
     render () {
         return (
@@ -44,7 +26,7 @@ class Thread extends Component {
                 {this.props.location.content.comments.map((comment, idx) => (
                     <div key={idx} className='comment-panel comment-bounds'>{comment}</div>
                 ))}
-                <NewComment postId={this.props.match.params.postId} /*addComment={this.addCommentToThread}*/ />    
+                <NewComment postId={this.props.match.params.postId} />    
             </div>
         )
     }

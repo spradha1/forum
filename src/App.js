@@ -9,7 +9,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.addPost = this.addPost.bind(this);
-		// this.updateThread = this.updateThread.bind(this);
+		this.sortByTime = this.sortByTime.bind(this);
 	}
 
 	state = {
@@ -28,20 +28,28 @@ class App extends Component {
 			.then(posts => this.setState({ posts }));
 	}
 
+	// sort posts by time_created in order to render them in chronological order
+	sortByTime = (a, b) => {
+		if (a.time_created > b.time_created)
+			return -1;
+		else
+			return 1;
+	}
+
 
 	// adds the new post
 	addPost = (postInput) => {
-		const req = {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				"text": postInput,
-				"comments": [],
-			})
-		};
 		if (postInput) {
+			const req = {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					"text": postInput,
+					"comments": []
+				})
+			};
 			fetch('http://localhost:3001/addPost', req)
 			.then((res) => res.json())
 			.then((data) => {
@@ -60,20 +68,15 @@ class App extends Component {
 			}, 1000);
 		}
 	}
-
-	// update post thread
-	/*updateThread (postId, commentInput) {
-		let temp = Object.assign({}, this.state);
-		temp.posts[postId].comments.push(commentInput);
-		document.querySelector('#comment-area').value = '';
-		this.setState(temp);
-	}*/
 	
 
 	render() {
 		return (
 			<div>
-				<Route exact path='/' render={() => <Home posts={this.state.posts.reverse()} addPost={this.addPost} />} />
+				<Route exact path='/' render={() => <Home 
+					posts={this.state.posts.sort(this.sortByTime)} 
+					addPost={this.addPost}
+				/>} />
 				<Route path='/post/:postId' component={Thread} />
 			</div>
 		)
