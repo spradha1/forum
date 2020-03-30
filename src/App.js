@@ -5,7 +5,6 @@ import Thread from './components/Thread';
 
 class App extends Component {
 
-	// binding functions to be called from child components
 	constructor(props) {
 		super(props);
 		this.addPost = this.addPost.bind(this);
@@ -21,14 +20,14 @@ class App extends Component {
 		this.fetcher();
 	}
 
-	// grab posts from express backend
+	// grab posts from through express
 	fetcher = () => {
 		fetch('/posts')
 			.then(res => res.json())
 			.then(posts => this.setState({ posts }));
 	}
 
-	// sort posts by time_created in order to render them in chronological order
+	// sort posts by time_created in order to render them in reverse chronological order
 	sortByTime = (a, b) => {
 		if (a.time_created > b.time_created)
 			return -1;
