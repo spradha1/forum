@@ -12,7 +12,7 @@ class Post extends Component {
     return (
       <div className="panel post-bounds">
         <Link className='link' to={{ 
-          pathname: `/post/${this.props.id}`,
+          pathname: `/post/${this.props.content.id}`,
           content: this.props.content
         }}>
           <div>

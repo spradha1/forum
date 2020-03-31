@@ -12,7 +12,8 @@ class Thread extends Component {
     /*content: {
       body: this.props.location.content.body,
       comments: this.props.location.content.comments
-    }*/
+		}*/
+		post: {},
     comments: []
   }
 
@@ -21,9 +22,21 @@ class Thread extends Component {
 		this.fetcher();
 	}
 
-	// grab comments through express
-	fetcher = () => {
-		const postId = this.props.location.content.id;
+	// grab data synchronously through express
+	fetcher = async () => {
+		const postId = this.props.match.params.postId;
+		await this.fetchPost(postId);
+		await this.fetchComments(postId);
+	}
+
+	// fetch post data
+	fetchPost = (postId) => {
+		fetch(`http://localhost:3001/post/?postId=${postId}`)
+			.then(res => res.json())
+			.then(post => this.setState({ post: post[0] }));
+	}
+	// fetch comments for the post
+	fetchComments = (postId) => {
 		fetch(`http://localhost:3001/comments/?postId=${postId}`)
 			.then(res => res.json())
 			.then(comments => this.setState({ comments }));
@@ -42,13 +55,13 @@ class Thread extends Component {
     return (
       <div>
         <div className="panel post-bounds">
-          {this.props.location.content.text}
+          {this.state.post.text}
         </div>
         <p className="post-bounds">Comments: {this.state.comments.length}</p>
+				<NewComment postId={this.props.match.params.postId} /> 
         {sortedComments.map((comment, idx) => (
           <div key={idx} className='comment-panel comment-bounds'>{comment.text}</div>
         ))}
-        <NewComment postId={this.props.match.params.postId} /> 
       </div>
     )
   }

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { 
+	BrowserRouter as Router,
+	Route 
+} from 'react-router-dom';
 import Home from './components/Home';
 import Thread from './components/Thread';
 
@@ -71,13 +74,15 @@ class App extends Component {
 
 	render() {
 		return (
-			<div>
-				<Route exact path='/' render={() => <Home 
-					posts={this.state.posts.sort(this.sortByTime)} 
-					addPost={this.addPost}
-				/>} />
-				<Route path='/post/:postId' component={Thread} />
-			</div>
+			<Router>
+				<div>
+					<Route exact path='/' render={() => <Home 
+						posts={this.state.posts.sort(this.sortByTime)} 
+						addPost={this.addPost}
+					/>} />
+					<Route path='/post/:postId' component={Thread} />
+				</div>
+			</Router>
 		)
 	}
 }
