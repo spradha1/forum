@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Post from './Post';
 import NewPost from './NewPost';
+import '../styles/Home.css';
 
 class Home extends Component {
 

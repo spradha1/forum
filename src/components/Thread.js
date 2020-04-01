@@ -5,14 +5,12 @@ class Thread extends Component {
   
 	constructor (props) {
 		super(props);
+		this.addComment = this.addComment.bind(this);
 		this.sortByTime = this.sortByTime.bind(this);
   }
     
   state = {
-    /*content: {
-      body: this.props.location.content.body,
-      comments: this.props.location.content.comments
-		}*/
+		postId: '',
 		post: {},
     comments: []
   }
@@ -27,6 +25,7 @@ class Thread extends Component {
 		const postId = this.props.match.params.postId;
 		await this.fetchPost(postId);
 		await this.fetchComments(postId);
+		this.setState({ postId });
 	}
 
 	// fetch post data
@@ -40,6 +39,38 @@ class Thread extends Component {
 		fetch(`http://localhost:3001/comments/?postId=${postId}`)
 			.then(res => res.json())
 			.then(comments => this.setState({ comments }));
+	}
+
+	// adds the new comment to the desired post
+	addComment = (postId, commentInput) => {
+		if (commentInput) {
+			const req = {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					"feed_id": postId,
+					"text": commentInput
+				})
+			};
+			fetch(`http://localhost:3001/addComment`, req)
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.msg === "OK")
+					this.fetcher();
+			});
+			document.querySelector('#comment-area').value = '';
+		}
+		else {
+			var alertBox = document.querySelector('.empty-comment-alert');
+			alertBox.innerHTML = "Comment cannot be empty";
+			alertBox.classList.toggle('empty-area');
+			setTimeout(() => {
+				alertBox.classList.toggle('empty-area');
+				alertBox.innerHTML = "";
+			}, 1000);
+		}
 	}
 
 	// sort comments by time_created in order to render them in chronological order
@@ -58,7 +89,10 @@ class Thread extends Component {
           {this.state.post.text}
         </div>
         <p className="post-bounds">Comments: {this.state.comments.length}</p>
-				<NewComment postId={this.props.match.params.postId} /> 
+				<NewComment 
+					postId={this.props.match.params.postId}
+					addComment={this.addComment}	
+				/> 
         {sortedComments.map((comment, idx) => (
           <div key={idx} className='comment-panel comment-bounds'>{comment.text}</div>
         ))}

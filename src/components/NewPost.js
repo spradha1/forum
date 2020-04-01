@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../styles/Home.css';
 
 class NewPost extends Component {
     state = {
