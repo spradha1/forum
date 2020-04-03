@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import NewComment from './NewComment';
+import {PrivateComponent, componentAuth} from '../App';
 
 class Thread extends Component {
   
@@ -89,9 +90,10 @@ class Thread extends Component {
           {this.state.post.text}
         </div>
         <p className="post-bounds">Comments: {this.state.comments.length}</p>
-				<NewComment 
+				<PrivateComponent
+					component={NewComment}
 					postId={this.props.match.params.postId}
-					addComment={this.addComment}	
+					addComment={this.addComment}
 				/> 
         {sortedComments.map((comment, idx) => (
           <div key={idx} className='comment-panel comment-bounds'>{comment.text}</div>
