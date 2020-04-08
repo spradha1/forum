@@ -1,36 +1,32 @@
 import React, { Component } from 'react';
 import { 
 	BrowserRouter as Router,
-	Route 
+	Route
 } from 'react-router-dom';
 import Home from './components/Home';
 import Thread from './components/Thread';
+import Login from './components/Login';
+import './styles/Home.css';
 
 
 // authentication object for components
 const componentAuth = {
   isAuthenticated: true,
-  signin(cb) {
-    this.isAuthenticated = true
-    setTimeout(cb, 100)
+  signin() {
+		this.isAuthenticated = true;
   },
-  signout(cb) {
-    this.isAuthenticated = false
-    setTimeout(cb, 100)
-  }
+  signout() {
+		this.isAuthenticated = false;
+	}
 }
 
 // authentication wrapper for component
 const PrivateComponent = ({ component: Component, ...rest }) => (
-  componentAuth.isAuthenticated === true && <Component {...rest} />
+  componentAuth.isAuthenticated && <Component {...rest} />
 )
 
 
 class App extends Component {
-
-	constructor(props) {
-		super(props);
-	}
 
 	state = {
 
@@ -40,9 +36,10 @@ class App extends Component {
 	render() {
 		return (
 			<Router>
-				<div>
+				<div className="appBody">
 					<Route exact path='/' component={Home} />
 					<Route path='/post/:postId' component={Thread} />
+					<Route exact path='/login' component={Login} />
 				</div>
 			</Router>
 		)

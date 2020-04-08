@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Post from './Post';
 import NewPost from './NewPost';
-import '../styles/Home.css';
-import {PrivateComponent, componentAuth} from '../App';
+import Navbar from './Navbar';
+import {PrivateComponent} from '../App';
 
 
 class Home extends Component {
@@ -73,6 +73,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+				<Navbar />
         <PrivateComponent component={NewPost} addPost={this.addPost} />
 				{this.state.posts.map((content, idx) => (
 					<Post key={idx} id={idx} content={content} />

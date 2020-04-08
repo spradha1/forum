@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NewComment from './NewComment';
-import {PrivateComponent, componentAuth} from '../App';
+import Navbar from './Navbar';
+import {PrivateComponent} from '../App';
 
 class Thread extends Component {
   
@@ -86,6 +87,7 @@ class Thread extends Component {
 		const sortedComments = this.state.comments.sort(this.sortByTime);
     return (
       <div>
+				<Navbar />
         <div className="panel post-bounds">
           {this.state.post.text}
         </div>

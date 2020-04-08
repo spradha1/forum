@@ -1,3 +1,7 @@
+html, body, #root, .appBody {
+  height: 100%;
+} 
+
 .post-bounds {
   margin: 1em 25%;
 }
@@ -27,7 +31,7 @@
 .post-button {
   display: inline-block;
   background: green;
-  width: 45px;
+  width: 55px;
   color: white;
   margin-left: 3%;
   text-align: center;
