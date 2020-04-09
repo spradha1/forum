@@ -66,7 +66,7 @@ class Home extends Component {
 			setTimeout(() => {
 				alertBox.classList.toggle('empty-area');
 				alertBox.innerHTML = "";
-			}, 1000);
+			}, 3000);
 		}
 	}
 

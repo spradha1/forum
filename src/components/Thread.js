@@ -36,6 +36,7 @@ class Thread extends Component {
 			.then(res => res.json())
 			.then(post => this.setState({ post: post[0] }));
 	}
+	
 	// fetch comments for the post
 	fetchComments = (postId) => {
 		fetch(`http://localhost:3001/comments/?postId=${postId}`)
@@ -71,7 +72,7 @@ class Thread extends Component {
 			setTimeout(() => {
 				alertBox.classList.toggle('empty-area');
 				alertBox.innerHTML = "";
-			}, 1000);
+			}, 3000);
 		}
 	}
 

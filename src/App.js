@@ -11,7 +11,7 @@ import './styles/Home.css';
 
 // authentication object for components
 const componentAuth = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   signin() {
 		this.isAuthenticated = true;
   },

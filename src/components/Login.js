@@ -17,13 +17,41 @@ class Login extends Component {
 
   // login
   login = () => {
-    // TODO: validate login credentials
-    componentAuth.signin();
-    this.setState({ loggedIn: componentAuth.isAuthenticated });
+    if (this.verifyLogin()) {
+      componentAuth.signin();
+      this.setState({ loggedIn: componentAuth.isAuthenticated });
+    }
+    else {
+      var alertBox = document.querySelector('.login-failed-alert');
+			alertBox.innerHTML = "Email/password is incorrect";
+      alertBox.classList.toggle('empty-area');
+      document.querySelector('#email').value = '';
+      document.querySelector('#password').value = '';
+			setTimeout(() => {
+				alertBox.classList.toggle('empty-area');
+				alertBox.innerHTML = "";
+			}, 3000);
+    }
+  }
+
+  // verify login credentials
+  verifyLogin = async () => {
+    // search users by email and password
+    const email = document.querySelector('#email').value;
+    const pwd = document.querySelector('#password').value;
+		await fetch(`http://localhost:3001/user/?email=${email}&pwd=${pwd}`)
+			.then(res => res.json())
+			.then(users => {
+        if (users.length === 1)
+          return true;
+        else
+          return false;
+      });
   }
 
   render () {
     const { loggedIn } = this.state;
+    // return to page from where login was attempted
     const { from } = this.props.location.state || { from: { pathname: '/'} }
     if (loggedIn) {
       return (
@@ -33,17 +61,18 @@ class Login extends Component {
     return (
       <div className='loginPage'>
         <div className='loginBox'>
-          <div className='username'>
-            <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+          <div className='email'>
+            <label htmlFor="email">Email</label>
+            <input type="text" id="email" />
           </div>
           <div className='password'>
             <label htmlFor="password">Password</label>
-            <input type="text" id="password" />
+            <input type="password" id="password" />
           </div>
           <div className='login-button' onClick={this.login}>
-            LOG IN
+            Login
           </div>
+          <div className='login-failed-alert'></div>
         </div>
       </div>
     )
