@@ -21,24 +21,35 @@ class Navbar extends Component {
   render () {
     return (
       <div className='nav-container'>
-        {componentAuth.isAuthenticated
-          ? <div className='log-button' onClick={this.logout}>
-              <Link className='link' to={{
-                pathname: `/`
-              }}>
-                LOG OUT
-              </Link>
-            </div>
-          : <div className='log-button'>
-              <Link className='link' to={{
-                pathname: `/login`,
-                state: {
-                  from: window.location.pathname
-                }
-              }}>
-                LOG IN
-              </Link>
-            </div>
+        {componentAuth.isAuthenticated &&
+          <div className='log-button' onClick={this.logout}>
+            <Link className='link' to={{
+              pathname: `/`
+            }}>
+              LOG OUT
+            </Link>
+          </div>
+        }
+        {!componentAuth.isAuthenticated &&
+          <div className='log-button'>
+            <Link className='link' to={{
+              pathname: `/login`,
+              state: {
+                from: window.location.pathname
+              }
+            }}>
+              LOG IN
+            </Link>
+          </div>
+        }
+        {!componentAuth.isAuthenticated &&
+          <div className='log-button'>
+            <Link className='link' to={{
+              pathname: `/signup`,
+            }}>
+              SIGN UP
+            </Link>
+          </div>
         }
       </div>
     )

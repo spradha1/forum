@@ -6,6 +6,7 @@ import {
 import Home from './components/Home';
 import Thread from './components/Thread';
 import Login from './components/Login';
+import Signup from './components/Signup';
 import './styles/Home.css';
 
 
@@ -40,6 +41,7 @@ class App extends Component {
 					<Route exact path='/' component={Home} />
 					<Route path='/post/:postId' component={Thread} />
 					<Route exact path='/login' component={Login} />
+					<Route exact path='/signup' component={Signup} />
 				</div>
 			</Router>
 		)

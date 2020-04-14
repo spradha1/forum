@@ -16,8 +16,8 @@ class Login extends Component {
   }
 
   // login
-  login = () => {
-    if (this.verifyLogin()) {
+  login = async () => {
+    if (await this.verifyLogin()) {
       componentAuth.signin();
       this.setState({ loggedIn: componentAuth.isAuthenticated });
     }
@@ -35,11 +35,11 @@ class Login extends Component {
   }
 
   // verify login credentials
-  verifyLogin = async () => {
+  verifyLogin = () => {
     // search users by email and password
     const email = document.querySelector('#email').value;
     const pwd = document.querySelector('#password').value;
-		await fetch(`http://localhost:3001/user/?email=${email}&pwd=${pwd}`)
+		return fetch(`http://localhost:3001/user/?email=${email}&pwd=${pwd}`)
 			.then(res => res.json())
 			.then(users => {
         if (users.length === 1)
