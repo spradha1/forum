@@ -4,6 +4,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import '../styles/Login.css';
+import logo from '../assets/shagadelic.jpg';
 
 class Login extends Component {
   
@@ -61,6 +62,10 @@ class Login extends Component {
     return (
       <div className='loginPage'>
         <div className='loginBox'>
+          <div className='appEmblem appEmblem-center'>
+            <img src={logo} alt='App Logo' />
+            <span>ForReal?</span>
+          </div>
           <div className='email'>
             <label htmlFor="email">Email</label>
             <input type="text" id="email" />

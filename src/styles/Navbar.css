@@ -13,3 +13,27 @@
   cursor: pointer;
   background-color: rgb(204, 204, 204);
 }
+
+.appEmblem {
+  display: flex;
+  flex-grow: 1;
+}
+
+.appEmblem-left {
+  justify-content: left;
+}
+
+/* align cenrer for login & signup pages */
+.appEmblem-center {
+  justify-content: center;
+}
+
+.appEmblem img {
+  height: 3em;
+}
+
+.appEmblem span {
+  padding: 1em;
+  color: rgb(2, 122, 2);
+  font-weight: 500;
+}

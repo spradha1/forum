@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {componentAuth} from '../App';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
+import logo from '../assets/shagadelic.jpg';
 
 class Navbar extends Component {
 
@@ -51,6 +52,10 @@ class Navbar extends Component {
             </Link>
           </div>
         }
+        <div className='appEmblem appEmblem-left'>
+          <img src={logo} alt='App Logo' />
+          <span>ForReal?</span>
+        </div>
       </div>
     )
   }

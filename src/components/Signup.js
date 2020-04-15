@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import {componentAuth} from '../App';
 import '../styles/Signup.css';
+import logo from '../assets/shagadelic.jpg';
 
 class Signup extends Component {
   
@@ -110,6 +111,10 @@ class Signup extends Component {
             this.signup();
           }} 
         >
+          <div className='appEmblem appEmblem-center'>
+            <img src={logo} alt='App Logo' />
+            <span>ForReal?</span>
+          </div>
           <div className='signup-email'>
             <label htmlFor="signup-email">Email*</label>
             <input type="text" id="signup-email" />
