@@ -21,7 +21,7 @@ class Signup extends Component {
     const email = document.querySelector('#signup-email').value;
     const pwd = document.querySelector('#signup-password').value;
     const confirmPwd = document.querySelector('#signup-confirm-password').value;
-    const status = this.verifySignup(email, pwd, confirmPwd);
+    const status = await this.verifySignup(email, pwd, confirmPwd);
     if (status) {
       const req = {
 				method: 'POST',
@@ -46,33 +46,46 @@ class Signup extends Component {
     else {
       console.log('Failed to sign up');
       // empty input fields on failing sign up
-      document.querySelector('#signup-email').value = "";
       document.querySelector('#signup-password').value = "";
       document.querySelector('#signup-confirm-password').value = "";
     }
   }
 
   // verfy signup information
-  verifySignup = (email, pwd, confirmPwd) => {   
-    if (this.verifyEmail(email) && this.verifyPassword(pwd, confirmPwd))
+  verifySignup = async (email, pwd, confirmPwd) => {   
+    if (await this.verifyEmail(email) && this.verifyPassword(pwd, confirmPwd))
       return true;
     return false;
   }
 
   // verify email pattern
-  verifyEmail = (email) => {
+  verifyEmail = async (email) => {
     const emailError = document.querySelector('.email-error');
     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     const matches = email.match(emailRegex);
 
-    if (email.length !== 0 && matches) {
-      emailError.innerHTML = "";
-      return true;
-    }
-    else {
+    if (email.length === 0 || !matches) {
       emailError.innerHTML = "Enter a valid email address";
       return false;
     }
+    else if (await this.isEmailUsed(email)) {
+      emailError.innerHTML = "Email is taken";
+      return false;
+    }
+    emailError.innerHTML = "";
+    return true;
+  }
+
+  // check if email is taken
+  isEmailUsed = (email) => {
+    return fetch(`http://localhost:3001/user/?email=${email}`)
+			.then(res => res.json())
+			.then(users => {
+        if (users.length === 1)
+          return true;
+        else
+          return false;
+      });
   }
 
   // verify password
