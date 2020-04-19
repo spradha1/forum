@@ -20,7 +20,7 @@ class NewPost extends Component {
 
     render () {
         return (
-            <div className='panel post-bounds'>
+            <div className='post-box'>
 				<textarea
                     id = 'post-area'
 					placeholder='What ya curious about?'

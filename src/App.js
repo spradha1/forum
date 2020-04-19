@@ -14,11 +14,13 @@ import './styles/Home.css';
 const componentAuth = {
 	isAuthenticated: false,
 	userId: -1,
-  signin() {
+  signin(id) {
 		this.isAuthenticated = true;
+		this.userId = id;
   },
   signout() {
 		this.isAuthenticated = false;
+		this.userId = -1;
 	}
 }
 

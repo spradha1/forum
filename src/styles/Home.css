@@ -2,27 +2,51 @@ html, body, #root, .appBody {
   height: 100%;
 } 
 
-.post-bounds {
-  margin: 1em 25%;
-}
-
-.comment-bounds {
-  margin: 0.5em 25%;
-}
-
-.panel, .comment-panel {
+.post-box, .comment-box {
   border: 0.2px solid rgb(143, 142, 142);
   border-radius: 5px;
   color: black;
+  padding: 0.5em;
 }
 
-.panel {
+.post-box {
+  margin: 1em 25%;
   background: rgb(173, 173, 173);
-  font-size: 17px;
-  padding: 10px;
+  font-size: 16px;
 }
 
-.comment-panel {
+.post-flex-box {
+  display: flex;
+  flex-flow: row-wrap;
+}
+
+.user_me, .user_other {
+  order: 1;
+  width: 10%;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.user_me {
+  color: blue;
+}
+
+.user_other {
+  color: crimson;
+}
+
+.text-content {
+  order: 2;
+  width: 85%;
+  padding-left: 0.5em;
+}
+
+.post-info-box {
+  margin: 1em 25%;
+}
+
+.comment-box {
+  margin: 0.5em 25%;
   background: rgb(219, 219, 219);
   font-size: 14px;
   padding: 5px;

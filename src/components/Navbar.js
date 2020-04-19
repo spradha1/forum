@@ -14,8 +14,12 @@ class Navbar extends Component {
 
   }
 
-  logout = () => {
-    componentAuth.signout();
+  logout = async () => {
+    await componentAuth.signout();
+    this.props.history.push({
+      pathname: '/',
+      state: { userId: componentAuth.userId }
+    });
   }
   
 
@@ -24,11 +28,7 @@ class Navbar extends Component {
       <div className='nav-container'>
         {componentAuth.isAuthenticated &&
           <div className='log-button' onClick={this.logout}>
-            <Link className='link' to={{
-              pathname: `/`
-            }}>
-              LOG OUT
-            </Link>
+            LOG OUT
           </div>
         }
         {!componentAuth.isAuthenticated &&

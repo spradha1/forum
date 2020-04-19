@@ -19,7 +19,7 @@ class NewComment extends Component {
 
     render () {
         return (
-            <div className='comment-panel comment-bounds'>
+            <div className='comment-box'>
 				<textarea
                     id = 'comment-area'
 					placeholder='What do ya think about this?'

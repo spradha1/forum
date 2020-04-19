@@ -37,8 +37,8 @@ class Signup extends Component {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.msg === "OK") {
-          console.log('Signed up');
-          componentAuth.signin();
+          console.log(data.user.id, 'Signed up');
+          componentAuth.signin(data.user.id);
           this.setState({ signedUp: componentAuth.isAuthenticated });
         }
       });

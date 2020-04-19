@@ -3,6 +3,7 @@ import Post from './Post';
 import NewPost from './NewPost';
 import Navbar from './Navbar';
 import {PrivateComponent} from '../App';
+import {componentAuth} from '../App';
 
 
 class Home extends Component {
@@ -14,12 +15,14 @@ class Home extends Component {
 	}
 
 	state = {
-		posts: []
+		posts: [],
+		userId: -1
 	}
 
 	// fetch data before mounting component
 	componentDidMount() {
 		this.fetcher();
+		this.setState({ userId: componentAuth.userId });
 	}
 
 	// grab posts from through express
@@ -71,12 +74,14 @@ class Home extends Component {
 	}
 
   render() {
+		// if redirected after logout, retrieve passed state
+		const userId = this.props.location.state ? this.props.location.state.userId : this.state.userId;
     return (
       <div>
-				<Navbar />
+				<Navbar history={this.props.history} />
         <PrivateComponent component={NewPost} addPost={this.addPost} />
 				{this.state.posts.map((content, idx) => (
-					<Post key={idx} id={idx} content={content} />
+					<Post key={idx} id={idx} userId={userId} content={content} />
 				))}
       </div>
     )

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NewComment from './NewComment';
 import Navbar from './Navbar';
 import {PrivateComponent} from '../App';
+import {componentAuth} from '../App';
 
 class Thread extends Component {
   
@@ -14,12 +15,14 @@ class Thread extends Component {
   state = {
 		postId: '',
 		post: {},
-    comments: []
+		comments: [],
+		userId: -1
   }
 
 	// fetch data before mounting app
 	componentDidMount() {
 		this.fetcher();
+		this.setState({ userId: componentAuth.userId});
 	}
 
 	// grab data synchronously through express
@@ -88,18 +91,27 @@ class Thread extends Component {
 		const sortedComments = this.state.comments.sort(this.sortByTime);
     return (
       <div>
-				<Navbar />
-        <div className="panel post-bounds">
-          {this.state.post.text}
+				<Navbar history={this.props.history} />
+        <div className="post-box">
+					<div className="post-flex-box">
+            {this.state.post.user_id === this.state.userId ?
+              <div className="user_me">ME</div>
+              :
+              <div className="user_other">??</div>
+            }
+            <div className="text-content">
+							{this.state.post.text}
+            </div>
+          </div>
         </div>
-        <p className="post-bounds">Comments: {this.state.comments.length}</p>
+        <p className="post-info-box">Comments: {this.state.comments.length}</p>
 				<PrivateComponent
 					component={NewComment}
 					postId={this.props.match.params.postId}
 					addComment={this.addComment}
 				/> 
         {sortedComments.map((comment, idx) => (
-          <div key={idx} className='comment-panel comment-bounds'>{comment.text}</div>
+          <div key={idx} className='comment-box'>{comment.text}</div>
         ))}
       </div>
     )

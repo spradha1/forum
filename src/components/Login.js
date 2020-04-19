@@ -18,8 +18,9 @@ class Login extends Component {
 
   // login
   login = async () => {
-    if (await this.verifyLogin()) {
-      componentAuth.signin();
+    const user = await this.verifyLogin();
+    if (user) {
+      componentAuth.signin(user.id);
       this.setState({ loggedIn: componentAuth.isAuthenticated });
     }
     else {
@@ -44,9 +45,9 @@ class Login extends Component {
 			.then(res => res.json())
 			.then(users => {
         if (users.length === 1)
-          return true;
+          return users[0];
         else
-          return false;
+          return null;
       });
   }
 
