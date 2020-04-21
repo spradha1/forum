@@ -57,7 +57,8 @@ class Thread extends Component {
 				},
 				body: JSON.stringify({
 					"feed_id": postId,
-					"text": commentInput
+					"text": commentInput,
+					"user_id": this.state.userId
 				})
 			};
 			fetch(`http://localhost:3001/addComment`, req)
@@ -111,7 +112,18 @@ class Thread extends Component {
 					addComment={this.addComment}
 				/> 
         {sortedComments.map((comment, idx) => (
-          <div key={idx} className='comment-box'>{comment.text}</div>
+					<div key={idx} className='comment-box'>
+						<div className="comment-flex-box">
+            	{comment.user_id === this.state.userId ?
+              	<div className="user_me">ME</div>
+              	:
+              	<div className="user_other">??</div>
+            	}
+            	<div className="text-content">
+								{comment.text}
+            	</div>
+						</div>
+					</div>
         ))}
       </div>
     )

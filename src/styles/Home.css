@@ -15,11 +15,19 @@ html, body, #root, .appBody {
   font-size: 16px;
 }
 
-.post-flex-box {
+.comment-box {
+  margin: 0.5em 25%;
+  background: rgb(219, 219, 219);
+  font-size: 14px;
+  padding: 5px;
+}
+
+.post-flex-box, .comment-flex-box {
   display: flex;
   flex-flow: row-wrap;
 }
 
+/* identifier of post creator */
 .user_me, .user_other {
   order: 1;
   width: 10%;
@@ -34,6 +42,8 @@ html, body, #root, .appBody {
 .user_other {
   color: crimson;
 }
+/* ********* */
+
 
 .text-content {
   order: 2;
@@ -43,13 +53,6 @@ html, body, #root, .appBody {
 
 .post-info-box {
   margin: 1em 25%;
-}
-
-.comment-box {
-  margin: 0.5em 25%;
-  background: rgb(219, 219, 219);
-  font-size: 14px;
-  padding: 5px;
 }
 
 .post-button {

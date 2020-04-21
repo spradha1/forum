@@ -32,15 +32,6 @@ class Home extends Component {
 			.then(posts => this.setState({ posts }));
 	}
 
-	// sort posts by time_created in order to render them in reverse chronological order
-	sortByTime = (a, b) => {
-		if (a.time_created > b.time_created)
-			return -1;
-		else
-			return 1;
-	}
-
-
 	// adds the new post
 	addPost = (postInput) => {
 		if (postInput) {
@@ -51,7 +42,7 @@ class Home extends Component {
 				},
 				body: JSON.stringify({
 					"text": postInput,
-					"comments": []
+					"user_id": this.state.userId
 				})
 			};
 			fetch('http://localhost:3001/addPost', req)
@@ -73,14 +64,24 @@ class Home extends Component {
 		}
 	}
 
+	// sort posts by time_created in order to render them in reverse chronological order
+	sortByTime = (a, b) => {
+		if (a.time_created > b.time_created)
+			return -1;
+		else
+			return 1;
+	}
+
+
   render() {
+		const sortedPosts = this.state.posts.sort(this.sortByTime);
 		// if redirected after logout, retrieve passed state
 		const userId = this.props.location.state ? this.props.location.state.userId : this.state.userId;
     return (
       <div>
 				<Navbar history={this.props.history} />
         <PrivateComponent component={NewPost} addPost={this.addPost} />
-				{this.state.posts.map((content, idx) => (
+				{sortedPosts.map((content, idx) => (
 					<Post key={idx} id={idx} userId={userId} content={content} />
 				))}
       </div>
