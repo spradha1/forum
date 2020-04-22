@@ -16,6 +16,7 @@ class Navbar extends Component {
 
   logout = async () => {
     await componentAuth.signout();
+    window.localStorage.clear();
     this.props.history.push({
       pathname: '/',
       state: { userId: componentAuth.userId }

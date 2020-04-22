@@ -32,6 +32,26 @@ const PrivateComponent = ({ component: Component, ...rest }) => (
 
 class App extends Component {
 
+	constructor(props) {
+		super(props);
+		// retrieve logged in user id in case of page refresh
+		if (window.performance) {
+			if (performance.navigation.type === 1) {
+				const savedAuth = window.localStorage.getItem('componentAuth');
+				if (savedAuth) {
+				  try {
+						const parsedAuth = JSON.parse(savedAuth);
+						if (parsedAuth.userId !== -1)
+							componentAuth.signin(parsedAuth.userId);
+					}
+					catch (e) {
+						console.log("Invalid JSON");
+				  }
+				}
+			}
+		}
+	}
+
 	state = {
 
 	}

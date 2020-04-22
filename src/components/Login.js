@@ -22,6 +22,9 @@ class Login extends Component {
     if (user) {
       componentAuth.signin(user.id);
       this.setState({ loggedIn: componentAuth.isAuthenticated });
+      window.localStorage.setItem('componentAuth', JSON.stringify({
+        userId: componentAuth.userId
+      }));
     }
     else {
       var alertBox = document.querySelector('.login-failed-alert');

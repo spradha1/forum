@@ -40,6 +40,9 @@ class Signup extends Component {
           console.log(data.user.id, 'Signed up');
           componentAuth.signin(data.user.id);
           this.setState({ signedUp: componentAuth.isAuthenticated });
+          window.localStorage.setItem('componentAuth', JSON.stringify({
+            userId: componentAuth.userId
+          }));
         }
       });
     }
