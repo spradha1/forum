@@ -26,7 +26,8 @@ class Post extends Component {
               <div className="user_other">??</div>
             }
             <div className="text-content">
-              {this.props.content.text}
+              {this.props.content.text}<br/>
+              {this.props.display_time_info(this.props.content.time_created)}
             </div>
           </div>
         </Link>

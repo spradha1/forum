@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import NewComment from './NewComment';
 import Navbar from './Navbar';
-import {PrivateComponent} from '../App';
-import {componentAuth} from '../App';
+import {
+	PrivateComponent,
+	componentAuth,
+	display_time_info
+} from '../App';
 
 class Thread extends Component {
   
@@ -101,7 +104,8 @@ class Thread extends Component {
               <div className="user_other">??</div>
             }
             <div className="text-content">
-							{this.state.post.text}
+							{this.state.post.text}<br/>
+							{display_time_info(this.state.post.time_created)}
             </div>
           </div>
         </div>
@@ -120,7 +124,8 @@ class Thread extends Component {
               	<div className="user_other">??</div>
             	}
             	<div className="text-content">
-								{comment.text}
+								{comment.text}<br/>
+								{display_time_info(comment.time_created)}
             	</div>
 						</div>
 					</div>

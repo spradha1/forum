@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import Post from './Post';
 import NewPost from './NewPost';
 import Navbar from './Navbar';
-import {PrivateComponent} from '../App';
-import {componentAuth} from '../App';
+import {
+	PrivateComponent,
+	componentAuth,
+	display_time_info
+} from '../App';
 
 
 class Home extends Component {
@@ -82,7 +85,13 @@ class Home extends Component {
 				<Navbar history={this.props.history} />
         <PrivateComponent component={NewPost} addPost={this.addPost} />
 				{sortedPosts.map((content, idx) => (
-					<Post key={idx} id={idx} userId={userId} content={content} />
+					<Post 
+						key={idx}
+						id={idx}
+						userId={userId}
+						content={content}
+						display_time_info={display_time_info}	
+					/>
 				))}
       </div>
     )
