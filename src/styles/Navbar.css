@@ -3,13 +3,14 @@
   display: flex;
   flex-flow: row-reverse;
   background: rgb(173, 173, 173);
+  max-height: 3em;
 }
 
-.log-button {
+.log-button, .home-button {
   padding: 1em;
 }
 
-.log-button:hover {
+.log-button:hover, .home-button:hover {
   cursor: pointer;
   background-color: rgb(204, 204, 204);
 }
@@ -17,6 +18,7 @@
 .appEmblem {
   display: flex;
   flex-grow: 1;
+  cursor: pointer;
 }
 
 .appEmblem-left {

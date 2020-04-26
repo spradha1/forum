@@ -22,6 +22,12 @@ class Navbar extends Component {
       state: { userId: componentAuth.userId }
     });
   }
+
+  goToHome = () => {
+    this.props.history.push({
+      pathname: '/'
+    });
+  }
   
 
   render () {
@@ -53,7 +59,14 @@ class Navbar extends Component {
             </Link>
           </div>
         }
-        <div className='appEmblem appEmblem-left'>
+        <div className='home-button'>
+          <Link className='link' to={{
+            pathname: `/`,
+          }}>
+            HOME
+          </Link>
+        </div>
+        <div className='appEmblem appEmblem-left' onClick={this.goToHome}>
           <img src={logo} alt='App Logo' />
           <span>ForReal?</span>
         </div>
