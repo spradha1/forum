@@ -39,7 +39,7 @@ const display_time_info = (time) => {
 	const post_time_year = post_time.getFullYear();
 	const post_time_month = months[post_time.getMonth()];
 	const post_time_date = post_time.getDate();
-	const post_time_hours = post_time.getHours();
+	const post_time_hours = post_time.getHours() < 10 ? '0' + post_time.getHours(): post_time.getHours();
 	const post_time_minutes = post_time.getMinutes() < 10 ? '0' + post_time.getMinutes(): post_time.getMinutes();
 	const post_time_clock = post_time_hours + ':' + post_time_minutes;
 

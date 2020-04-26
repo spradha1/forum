@@ -105,7 +105,7 @@ class Thread extends Component {
             }
             <div className="text-content">
 							{this.state.post.text}<br/>
-							{display_time_info(this.state.post.time_created)}
+							<span className="time_info">{display_time_info(this.state.post.time_created)}</span>
             </div>
           </div>
         </div>
@@ -125,7 +125,7 @@ class Thread extends Component {
             	}
             	<div className="text-content">
 								{comment.text}<br/>
-								{display_time_info(comment.time_created)}
+								<span className="time_info">{display_time_info(comment.time_created)}</span>
             	</div>
 						</div>
 					</div>
