@@ -34,12 +34,12 @@ class Navbar extends Component {
     return (
       <div className='nav-container'>
         {componentAuth.isAuthenticated &&
-          <div className='log-button' onClick={this.logout}>
+          <div className='nav-option' onClick={this.logout}>
             LOG OUT
           </div>
         }
         {!componentAuth.isAuthenticated &&
-          <div className='log-button'>
+          <div className='nav-option'>
             <Link className='link' to={{
               pathname: `/login`,
               state: {
@@ -50,8 +50,17 @@ class Navbar extends Component {
             </Link>
           </div>
         }
+        {componentAuth.isAuthenticated &&
+          <div className='nav-option'>
+            <Link className='link' to={{
+              pathname: `/mywall`,
+            }}>
+              MY WALL
+            </Link>
+          </div>
+        }
         {!componentAuth.isAuthenticated &&
-          <div className='log-button'>
+          <div className='nav-option'>
             <Link className='link' to={{
               pathname: `/signup`,
             }}>
@@ -59,7 +68,7 @@ class Navbar extends Component {
             </Link>
           </div>
         }
-        <div className='home-button'>
+        <div className='nav-option'>
           <Link className='link' to={{
             pathname: `/`,
           }}>

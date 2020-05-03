@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {componentAuth} from '../App';
 import {
-  Redirect
+  Redirect,
+  Link
 } from 'react-router-dom';
 import '../styles/Login.css';
 import logo from '../assets/shagadelic.jpg';
@@ -82,6 +83,14 @@ class Login extends Component {
             Login
           </div>
           <div className='login-failed-alert'></div>
+          <div className='signup-link'>
+            Don't have an account?
+            <Link className='link' to={{
+              pathname: `/signup`,
+            }}>
+              <span>Sign up now</span>
+            </Link>
+          </div>
         </div>
       </div>
     )

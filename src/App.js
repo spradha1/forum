@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Thread from './components/Thread';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import MyWall from './components/MyWall';
 import './styles/Home.css';
 
 
@@ -90,10 +91,11 @@ class App extends Component {
 		return (
 			<Router>
 				<div className="appBody">
-					<Route exact path='/' component={Home} display_time_info={this.display_time_info} />
+					<Route exact path='/' component={Home} />
 					<Route path='/post/:postId' component={Thread} display_time_info={this.display_time_info} />
 					<Route exact path='/login' component={Login} />
 					<Route exact path='/signup' component={Signup} />
+					<Route exact path='/mywall' component={MyWall} />
 				</div>
 			</Router>
 		)

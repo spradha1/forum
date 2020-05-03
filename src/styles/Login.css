@@ -60,3 +60,20 @@
   color: white;
   margin-left: 3%;
 }
+
+.signup-link, .login-link {
+  width: 100%;
+  padding: 0.5em;
+  font-size: 0.75em;
+  color: darkslategray;
+}
+
+.signup-link span, .login-link span {
+  margin-left: 1em;
+  text-decoration: underline;
+  color: darkslateblue;
+}
+
+.signup-link span:hover, .login-link span:hover {
+  color: darkblue;
+}

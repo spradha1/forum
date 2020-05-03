@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Redirect
+  Redirect,
+  Link
 } from 'react-router-dom';
 import {componentAuth} from '../App';
 import '../styles/Signup.css';
@@ -148,6 +149,14 @@ class Signup extends Component {
           <span className="signup-confirm-password-error"></span>
           <div className='signup-button'>
             <input type='submit' value='Sign up' />
+          </div>
+          <div className='login-link'>
+            Already have an account?
+            <Link className='link' to={{
+              pathname: `/login`,
+            }}>
+              <span>Login now</span>
+            </Link>
           </div>
         </form>
       </div>

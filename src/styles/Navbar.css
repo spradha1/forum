@@ -6,11 +6,11 @@
   max-height: 3em;
 }
 
-.log-button, .home-button {
+.nav-option {
   padding: 1em;
 }
 
-.log-button:hover, .home-button:hover {
+.nav-option:hover {
   cursor: pointer;
   background-color: rgb(204, 204, 204);
 }
