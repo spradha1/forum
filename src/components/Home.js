@@ -14,6 +14,7 @@ class Home extends Component {
   constructor(props) {
 		super(props);
 		this.addPost = this.addPost.bind(this);
+		this.deletePost = this.deletePost.bind(this);
 		this.sortByTime = this.sortByTime.bind(this);
 	}
 
@@ -67,6 +68,29 @@ class Home extends Component {
 		}
 	}
 
+	// delete button clicked on post
+  deletePost = (e, postId) => {
+		e.preventDefault();
+    if (window.confirm("Are you sure you want to delete this post?") === true) {
+			const req = {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					"postId": postId
+				})
+			};
+      fetch('http://localhost:3001/deletePost', req)
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.msg === "OK")
+					this.fetcher();
+			});
+    }      
+  }
+
+
 	// sort posts by time_created in order to render them in reverse chronological order
 	sortByTime = (a, b) => {
 		if (a.time_created > b.time_created)
@@ -90,7 +114,8 @@ class Home extends Component {
 						id={idx}
 						userId={userId}
 						content={content}
-						display_time_info={display_time_info}	
+						display_time_info={display_time_info}
+						deletePost={this.deletePost}
 					/>
 				))}
       </div>

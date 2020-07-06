@@ -11,7 +11,8 @@ import {
 class MyWall extends Component {
 
   constructor(props) {
-		super(props);
+    super(props);
+    this.deletePost = this.deletePost.bind(this);
 		this.sortByTime = this.sortByTime.bind(this);
 	}
 
@@ -29,7 +30,29 @@ class MyWall extends Component {
 		fetch(`http://localhost:3001/myposts/?user_id=${componentAuth.userId}`)
 			.then(res => res.json())
 			.then(posts => this.setState({ posts }));
-	}
+  }
+  
+  // delete button clicked on post
+  deletePost = (e, postId) => {
+		e.preventDefault();
+    if (window.confirm("Are you sure you want to delete this post?") === true) {
+			const req = {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					"postId": postId
+				})
+			};
+      fetch('http://localhost:3001/deletePost', req)
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.msg === "OK")
+					this.fetcher();
+			});
+    }      
+  }
 
 	// sort posts by time_created in order to render them in reverse chronological order
 	sortByTime = (a, b) => {
@@ -55,7 +78,8 @@ class MyWall extends Component {
               id={idx}
               userId={userId}
               content={content}
-              display_time_info={display_time_info}	
+              display_time_info={display_time_info}
+              deletePost={this.deletePost}
             />
           ))}
         </div>
