@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import NewComment from './NewComment';
 import Navbar from './Navbar';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { Redirect } from 'react-router-dom';
 import {
 	PrivateComponent,
 	componentAuth,
@@ -11,7 +14,9 @@ class Thread extends Component {
   
 	constructor (props) {
 		super(props);
+		this.deletePost = this.deletePost.bind(this);
 		this.addComment = this.addComment.bind(this);
+		this.deleteComment = this.deleteComment.bind(this);
 		this.sortByTime = this.sortByTime.bind(this);
   }
     
@@ -19,7 +24,8 @@ class Thread extends Component {
 		postId: '',
 		post: {},
 		comments: [],
-		userId: -1
+		userId: -1,
+		deleted: false
   }
 
 	// fetch data before mounting app
@@ -48,6 +54,27 @@ class Thread extends Component {
 		fetch(`http://localhost:3001/comments/?postId=${postId}`)
 			.then(res => res.json())
 			.then(comments => this.setState({ comments }));
+	}
+
+	// delete post
+	deletePost = (postId) => {
+		if (window.confirm("Are you sure you want to delete this post?") === true) {
+			const req = {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					"postId": postId
+				})
+			};
+      fetch('http://localhost:3001/deletePost', req)
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.msg === "OK")
+					this.setState({ deleted: true });
+			});
+    } 
 	}
 
 	// adds the new comment to the desired post
@@ -83,6 +110,27 @@ class Thread extends Component {
 		}
 	}
 
+	// delete comment
+	deleteComment = (commentId) => {
+		if (window.confirm("Are you sure you want to delete this comment?") === true) {
+			const req = {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					"commentId": commentId
+				})
+			};
+      fetch('http://localhost:3001/deleteComment', req)
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.msg === "OK")
+					this.fetchComments(this.state.postId);
+			});
+    } 
+	}
+
 	// sort comments by time_created in order to render them in chronological order
 	sortByTime = (a, b) => {
 		if (a.time_created > b.time_created)
@@ -93,6 +141,12 @@ class Thread extends Component {
 
   render () {
 		const sortedComments = this.state.comments.sort(this.sortByTime);
+		const { deleted } = this.state;
+    if (deleted) {
+      return (
+        <Redirect to="/" />
+      )
+    }
     return (
       <div>
 				<Navbar history={this.props.history} />
@@ -107,6 +161,11 @@ class Thread extends Component {
 							{this.state.post.text}<br/>
 							<span className="time_info">{display_time_info(this.state.post.time_created)}</span>
             </div>
+						{this.state.post.user_id === this.state.userId &&
+              <div className="delete-button">
+                <FontAwesomeIcon icon={faTimesCircle} onClick={() => this.deletePost(this.state.postId)}/>
+              </div>
+            }
           </div>
         </div>
         <p className="post-info-box">Comments: {this.state.comments.length}</p>
@@ -127,6 +186,11 @@ class Thread extends Component {
 								{comment.text}<br/>
 								<span className="time_info">{display_time_info(comment.time_created)}</span>
             	</div>
+							{comment.user_id === this.state.userId &&
+              	<div className="delete-button">
+                	<FontAwesomeIcon icon={faTimesCircle} onClick={() => this.deleteComment(comment.id)}/>
+              	</div>
+            	}
 						</div>
 					</div>
         ))}
