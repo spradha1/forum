@@ -75,8 +75,8 @@ class Navbar extends Component {
             HOME
           </Link>
         </div>
-        <div className='appEmblem appEmblem-left' onClick={this.goToHome}>
-          <img src={logo} alt='App Logo' />
+        <div className='appEmblem appEmblem-left'>
+          <img src={logo} alt='App Logo' onClick={this.goToHome} />
           <span>ForReal?</span>
         </div>
       </div>

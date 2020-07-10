@@ -107,17 +107,19 @@ class Home extends Component {
     return (
       <div>
 				<Navbar history={this.props.history} />
-        <PrivateComponent component={NewPost} addPost={this.addPost} />
-				{sortedPosts.map((content, idx) => (
-					<Post 
-						key={idx}
-						id={idx}
-						userId={userId}
-						content={content}
-						display_time_info={display_time_info}
-						deletePost={this.deletePost}
-					/>
-				))}
+				<div className="home-posts">
+					<PrivateComponent component={NewPost} addPost={this.addPost} />
+					{sortedPosts.map((content, idx) => (
+						<Post
+							key={idx}
+							id={idx}
+							userId={userId}
+							content={content}
+							display_time_info={display_time_info}
+							deletePost={this.deletePost}
+						/>
+					))}
+				</div>
       </div>
     )
   }

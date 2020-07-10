@@ -60,7 +60,13 @@ class MyWall extends Component {
 			return -1;
 		else
 			return 1;
-	}
+  }
+
+  goToHome = () => {
+    this.props.history.push({
+      pathname: '/'
+    });
+  }
 
 
   render() {
@@ -72,16 +78,26 @@ class MyWall extends Component {
       return (
         <div>
           <Navbar history={this.props.history} />
-          {sortedPosts.map((content, idx) => (
-            <Post 
-              key={idx}
-              id={idx}
-              userId={userId}
-              content={content}
-              display_time_info={display_time_info}
-              deletePost={this.deletePost}
-            />
-          ))}
+          <div className="mywall-box">
+            <div className="options-section">
+              <div>My email </div>
+              <div onClick={this.goToHome}>Home</div>
+              <div>Change Password</div>
+              <div>Delete Account</div>
+            </div>
+            <div className="posts-section">
+              {sortedPosts.map((content, idx) => (
+                <Post
+                  key={idx}
+                  id={idx}
+                  userId={userId}
+                  content={content}
+                  display_time_info={display_time_info}
+                  deletePost={this.deletePost}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       )
     }

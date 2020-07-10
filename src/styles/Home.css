@@ -10,13 +10,13 @@ html, body, #root, .appBody {
 }
 
 .post-box {
-  margin: 1em 25%;
+  margin: 1em 0;
   background: rgb(173, 173, 173);
   font-size: 16px;
 }
 
 .comment-box {
-  margin: 0.5em 25%;
+  margin: 0.5em 0;
   background: rgb(219, 219, 219);
   font-size: 14px;
   padding: 5px;
@@ -109,6 +109,42 @@ html, body, #root, .appBody {
   font-size: 0.75em;
   color: darkslategray;
 }
+
+.home-posts {
+  margin: 0 25%;
+}
+
+/* MyWall page alignment */
+  .mywall-box {
+    display: flex;
+    flex-flow: row-wrap;
+  }
+
+  .options-section {
+    order: 0;
+    width: 22%;
+    margin: 0 3%;
+  }
+  .options-section div {
+    margin: 1em 0;
+    background: rgb(173, 173, 173);
+    border-radius: 5px;
+    padding: 0.3em;
+    font-size: 0.9em;
+    font-weight: 350;
+  }
+  .options-section div:hover {
+    cursor: pointer;
+    background: linear-gradient(rgb(204, 204, 204), rgb(173, 173, 173));
+  }
+
+  .posts-section {
+    order: 1;
+    width: 78%;
+    margin: 0 5%;
+  }
+
+/* **************** */
 
 /* empty post & comment invalidaton alert styles */
 .empty-post-alert, .empty-comment-alert {
